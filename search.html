@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>SEARCH</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.1.1/css/all.css'>
+    <style>
+        p {
+            font-size: 20px;
+            font-family: sans-serif;
+            color: black;
+        }
+
+        .background {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-image: url("https://images4.alphacoders.com/174/174736.jpg");
+            background-size: cover;
+        }
+
+        .submit {
+            width: 30%;
+            height: 5%;
+            position: absolute;
+            top: 90%;
+            left: 35%;
+            background-color: #eb6d9a;
+            background-size: cover;
+            font-family: 'Arial Black', Gadget, sans-serif;
+        }
+
+        .search {
+            width: 50%;
+            height: 93.5%;
+            position: absolute;
+            top: 46px;
+            left: 25%;
+            padding: 0px 10px 10px 10px;
+            border: 2px solid rgb(235, 109, 154);
+            background-color: rgb(255, 255, 255);
+            background-size: cover;
+            font-family: 'Arial', Gadget, sans-serif;
+        }
+
+        .dropbtn {
+            background-color: #ce2243;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropbtn:hover,
+        .dropbtn:focus {
+            background-color: #eb6d9a;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f7c9e1;
+            width: 100%;
+            overflow: auto;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 16px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown a:hover {
+            background-color: #ddd;
+        }
+
+        .show {
+            display: block;
+        }
+
+        li {
+            float: left;
+            width: 120px;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        a {
+            font-size: 20px;
+            font-family: sans-serif;
+            color: black;
+        }
+
+        nav {
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul {
+            margin: 0;
+            list-style: none;
+            display: flex;
+            box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        nav ul li {
+            padding: 3px;
+        }
+
+        nav ul li a {
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        nav ul li #fb {
+            background: #0B84ED;
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+        }
+
+        nav ul li #search_btn {
+            border: none;
+            outline: none;
+            background: rgba(0, 0, 0, 0.068);
+            padding: 8px;
+            color: #888;
+            width: 40px;
+            height: 40px;
+            font-size: 1rem;
+            border-radius: 50%;
+            cursor: pointer;
+
+        }
+
+        nav ul li#space1 {
+            flex: 1;
+        }
+
+        nav ul li#space2 {
+            flex: 2;
+        }
+
+        nav ul li a {
+            height: 40px;
+            width: var(--btn-width-100);
+            font-size: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: rgb(158, 158, 158);
+            transition: .5s;
+
+        }
+
+        nav ul li #btn_plus,
+        nav ul li #btn_msg,
+        nav ul li #btn_bell,
+        nav ul li #btn_profile {
+            height: 40px;
+            width: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1rem;
+            color: #444;
+            background: rgba(0, 0, 0, 0.068);
+            border: none;
+            outline: none;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+
+        nav ul li:hover #home,
+        nav ul li:hover #group,
+        nav ul li:hover #tv,
+        nav ul li:hover #friend {
+            background: rgba(0, 0, 0, 0.138);
+            color: #444;
+            border-radius: 5px;
+
+        }
+
+        .tooltip {
+            position: relative;
+        }
+
+        .tooltip::after {
+            content: attr(data-tooltip);
+            height: 30px;
+            background: rgba(0, 0, 0, 0.4);
+            color: #fff;
+            font-size: 1rem;
+            text-align: center;
+            position: absolute;
+            bottom: -150%;
+            padding: 5px 12px;
+            line-height: 30px;
+            border-radius: 3px;
+            opacity: 0;
+            transition: .3s;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .tooltip:hover::after {
+            opacity: 1;
+        }
+
+        nav ul li #btn_profile::after {
+            margin-left: -20px;
+        }
+
+        nav ul li#space1 {
+            flex: 1;
+        }
+
+        @media screen and (max-width: 700px) {
+
+            nav ul li#space1,
+            nav ul li#space2 {
+                display: none;
+            }
+
+            nav ul {
+                min-width: 600px;
+                justify-content: space-between;
+            }
+
+            :root {
+                --btn-width-100: 60px;
+            }
+        }
+
+        #topheader .navbar-nav li>a:hover,
+        #topheader .navbar-nav li>a:focus {
+            color: #0B84ED;
+        }
+
+        #topheader .navbar-nav li.active>a {
+            color: #0B84ED;
+        }
+
+        .active {
+            color: #0B84ED !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background">
+        <header class="navbarbg" id="topheader"
+            style="background-color: #e96c98;height: 46px;width: 100%;position: fixed;top: 0;left: 0;z-index: 1">
+            <nav>
+                <ul class="navbar-nav">
+                    <li> <a class="tooltip active" data-tooltip="Search" href="search.html" id="search"> <i
+                                class="fas fa-search  "></i>
+                        </a> </li>
+                    <li> <a class="tooltip" class="active" data-tooltip="Home" href="congsu.social" id="home"> <i
+                                class="fas fa-home    "></i>
+                        </a> </li>
+
+                    <li> <a class="tooltip" data-tooltip="Friend" href="table.html" id="friend"> <i
+                                class="fas fa-user-alt    "></i>
+                        </a> </li>
+                    </a> </li>
+                    <li id="space1"></li>
+                    <li> <a class="tooltip " data-tooltip="Message" href="index.html" id="message"> <i
+                                class="fas fa-comments    "></i>
+                        </a> </li>
+                    <li> <a class="tooltip" class="active" data-tooltip="Call" href="#" id="Call"> <i
+                                class="fas fa-phone    "></i>
+                        </a> </li>
+                    <li> <a class="tooltip" class="active" data-tooltip="Notification" href="#" id="notification"> <i
+                                class="fas fa-bell    "></i>
+                        </a> </li>
+                </ul>
+            </nav>
+        </header>
+        <div class="search">
+            <form action="ProcessProfile" method="post">
+                <p><strong>Age</strong></p>
+                <input type="checkbox" name="age" value="1"> 18-25
+                <input type="checkbox" name="age" value="2"> 26-35
+                <input type="checkbox" name="age" value="3"> 36-45
+
+                <p><strong>Gender</strong></p>
+                <input type="checkbox" name="gioitinh" value="1"> Male
+                <input type="checkbox" name="gioitinh" value="0"> Female
+                <br><br>
+
+                <div class="dropdown">
+                    <button type="button" onclick="myFunction()" class="dropbtn">Hobbies</button>
+                    <div id="myDropdown" class="dropdown-content">
+                        <ul>
+                            <li>
+                                <a href="">Sport</a>
+                            <li><input type="checkbox" name="cycling" value="1"> Cycling</li>
+                            <li><input type="checkbox" name="tennis" value="2"> Tennis</li>
+                            <li><input type="checkbox" name="soccer" value="3"> Soccer</li>
+                            <li><input type="checkbox" name="volleyball" value="4"> Volleyball</li>
+                            <li><input type="checkbox" name="basketball" value="5"> Basketball </li>
+                            <li><input type="checkbox" name="golf" value="6"> Golf</li>
+                            <li><input type="checkbox" name="swimming" value="7"> Swimming</li>
+                            <li><input type="checkbox" name="badminton" value="8"> Badminton</li>
+                            <li><input type="checkbox" name="skiing" value="9"> Skiing</li>
+                            <li><input type="checkbox" name="table tennis" value="10"> Table Tennis</li>
+                            </li>
+                        </ul>
+
+
+
+                        <ul>
+                            <li>
+                                <a href="">Music</a>
+                            <li><input type="checkbox" name="k-pop" value="11"> K-pop</li>
+                            <li><input type="checkbox" name="v-pop" value="12"> V-pop</li>
+                            <li><input type="checkbox" name="ballad" value="13"> Ballad</li>
+                            <li><input type="checkbox" name="rock" value="14"> Rock</li>
+                            <li><input type="checkbox" name="rap" value="15"> Rap</li>
+                            <li><input type="checkbox" name="bolero" value="16"> Bolero </li>
+                            <li><input type="checkbox" name="jazz" value="17"> Jazz</li>
+                            <li><input type="checkbox" name="classial" value="18"> Classical</li>
+                            <li><input type="checkbox" name="edm" value="19"> EDM</li>
+                            <li><input type="checkbox" name="us-uk" value="20"> US-UK</li>
+                            <li><input type="checkbox" name="opera" value="21"> Opera</li>
+                            </li>
+                        </ul>
+
+                        <ul>
+                            <li>
+                                <a href="">Movie</a>
+                            <li><input type="checkbox" name="romantic" value="22"> Romantic</li>
+                            <li><input type="checkbox" name="action film" value="23"> Action film</li>
+                            <li><input type="checkbox" name="comedy" value="24"> Comedy</li>
+                            <li><input type="checkbox" name="horror" value="25"> Horror</li>
+                            <li><input type="checkbox" name="drama" value="26"> Drama</li>
+                            <li><input type="checkbox" name="sci-fi" value="27"> Sci-fi</li>
+                            <li><input type="checkbox" name="cartoon" value="28"> Cartoon</li>
+                            <li><input type="checkbox" name="adventure" value="29"> Adventure</li>
+                            </li>
+                        </ul>
+
+                        <ul>
+                            <li>
+                                <a href="">Read Book</a>
+                            <li><input type="checkbox" name="thriller" value="30"> Thriller</li>
+                            <li><input type="checkbox" name="short story" value="31"> Short story</li>
+                            <li><input type="checkbox" name="novel" value="32"> Novel</li>
+                            <li><input type="checkbox" name="poem" value="33"> Poem</li>
+                            <li><input type="checkbox" name="fair table" value="35"> Fair table</li>
+                            <li><input type="checkbox" name="funny story" value="36"> Funny story</li>
+                            <li><input type="checkbox" name="love story" value="37"> Love story</li>
+                            </li>
+                        </ul>
+
+                        <ul>
+                            <li>
+                                <a href="">More</a>
+                            <li><input type="checkbox" name="sleep" value="38"> Sleep</li>
+                            <li><input type="checkbox" name="eat-drink" value="39"> Eat-Drink</li>
+                            <li><input type="checkbox" name="camping" value="40"> Camping</li>
+                            <li><input type="checkbox" name="travelling" value="41"> Travelling</li>
+                            <li><input type="checkbox" name="shopping" value="42"> Shopping</li>
+                            <li><input type="checkbox" name="cooking" value="43"> Cooking</li>
+                            <li><input type="checkbox" name="sing" value="44"> Sing</li>
+                            <li><input type="checkbox" name="sci-fi book" value="34"> Sci-fi book</li>
+                            </li>
+                        </ul>
+                    </div>
+                    <br><br>
+                    <br><br>
+                </div>
+                <br><br>
+                <br><br>
+        </div>
+        <button class="submit" type="submit" name="submit" value="submit">Search</button>
+
+        </form>
+        <script>
+            function myFunction() {
+                document.getElementById("myDropdown").classList.toggle("show");
+            }
+            $('#topheader .navbar-nav a').on('click', function () {
+                $('#topheader .navbar-nav').find('li.active').removeClass('active');
+                $(this).parent('li').addClass('active');
+            });
+        </script>
+
+    </div>
+    </div>
+</body>
+
+</html>

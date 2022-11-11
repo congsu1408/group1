@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.1.1/css/all.css'>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <div class="bg">
+        <header class="navbarbg" id="topheader">
+            <nav>
+                <ul class="navbar-nav">
+                    <li> <a class="tooltip" data-tooltip="Search" href="search.html" id="search"> <i
+                                class="fas fa-search  "></i>
+                        </a> </li>
+                    <li> <a class="tooltip" class="active" data-tooltip="Home" href="congsu.social" id="home"> <i
+                                class="fas fa-home    "></i>
+                        </a> </li>
+
+                    <li> <a class="tooltip" data-tooltip="Friend" href="table.html" id="friend"> <i
+                                class="fas fa-user-alt    "></i>
+                        </a> </li>
+                    </a> </li>
+                    <li id="space1"></li>
+                    <li> <a class="tooltip active" data-tooltip="Message" href="index.html" id="message"> <i
+                                class="fas fa-comments    "></i>
+                        </a> </li>
+                    <li> <a class="tooltip" class="active" data-tooltip="Call" href="#" id="Call"> <i
+                                class="fas fa-phone    "></i>
+                        </a> </li>
+                    <li> <a class="tooltip" class="active" data-tooltip="Notification" href="#" id="notification"> <i
+                                class="fas fa-bell    "></i>
+                        </a> </li>
+                </ul>
+            </nav>
+        </header>
+        <div style="width: 50%;margin: auto;background-color: pink">
+            <center>
+                <h1 style="color:palevioletred ;font-family:cursive;font-size:35px">Chat app</h1>
+            </center>
+            <form action="ProcessSetNguoiNhan" method="post" id="body-login-form">
+                <label style="font-size: 20px;font-family: cursive, Helvetica, sans-serif;">Nhan Tin to</label>
+                <input type="text" name="friend" placeholder="friend Email or phone" /
+                    value="<%=StringUtil.getString(session.getAttribute(" crush"))%>">
+                <input type="text" name="content" placeholder="content in here" />
+                <button type="submit" id="btn-login" style="background-color:palevioletred ;"><a
+                        href="news-feed.html">Send</a></button>
+            </form>
+        </div>
+        <div class="container" id="messages-scroll">
+            <br><br><br>
+            <div class="messages messages--received">
+                <div class="message">Để tin nhắn nhận ở đây</div>
+                <div class="message">nó sẽ có bgr như này</div>
+            </div>
+            <div class="messages messages--sent">
+                <div class="message">Để tin nhắn gửi ở đây</div>
+                <div class="message">nó sẽ có bgr như này</div>
+            </div>
+            <div class="messages messages--received">
+                <div class="message">oke</div>
+            </div>
+            <div class="messages messages--received">
+                <div class="message">Để tin nhắn nhận ở đây</div>
+                <div class="message">nó sẽ có bgr như này</div>
+            </div>
+            <div class="messages messages--sent">
+                <div class="message">Để tin nhắn gửi ở đây</div>
+                <div class="message">nó sẽ có bgr như này</div>
+            </div>
+            <div class="messages messages--received">
+                <div class="message">oke</div>
+            </div>
+            <div class="messages messages--received">
+                <div class="message">Để tin nhắn nhận ở đây</div>
+                <div class="message">nó sẽ có bgr như này</div>
+            </div>
+            <div class="messages messages--sent">
+                <div class="message">Để tin nhắn gửi ở đây</div>
+                <div class="message">nó sẽ có bgr như này</div>
+            </div>
+            <div class="messages messages--received">
+                <div class="message">oke</div>
+            </div>
+            <div class="messages messages--received">
+                <div class="message">Để tin nhắn nhận ở đây</div>
+                <div class="message">nó sẽ có bgr như này</div>
+            </div>
+            <div class="messages messages--sent">
+                <div class="message">Để tin nhắn gửi ở đây</div>
+                <div class="message">nó sẽ có bgr như này</div>
+            </div>
+            <div class="messages messages--received">
+                <div class="message">oke</div>
+            </div>
+            <div class="messages messages--received">
+                <div class="message">Để tin nhắn nhận ở đây</div>
+                <div class="message">nó sẽ có bgr như này</div>
+            </div>
+            <div class="messages messages--sent">
+                <div class="message">Để tin nhắn gửi ở đây</div>
+                <div class="message">nó sẽ có bgr như này</div>
+            </div>
+            <div class="messages messages--received">
+                <div class="message">oke</div>
+            </div>
+        </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(() => {
+        setInterval(() => {
+            $.post('http://192.168.31.148:8080/BMAGBOOK/chat-box', (data) => {
+                let messages = data.split(';');
+                let html = '';
+                for (let i = 0; i < messages.length; i++) {
+                    let item = messages[i];
+                    if (item[0] === '<')
+                        html += `<li style="text-align: left; margin: 5px 0px;">` + item.slice(1) + `</li>`;
+                    else
+                        html += `<li style="text-align: right; background-color: #f8f8f8; margin: 5px 0px;">` + item.slice(1) + `</li>`;
+                }
+
+                console.log(html);
+
+                const messageBox = document.querySelector('.message-box');
+                messageBox.innerHTML = html;
+            })
+        }, 1000);
+    })
+</script>
+<script>
+    function updateScroll() {
+        var element = document.getElementById("messages-scroll");
+        element.scrollTop = element.scrollHeight;
+    }
+    setTimeout(updateScroll, 100);
+    $('#topheader .navbar-nav a').on('click', function () {
+        $('#topheader .navbar-nav').find('li.active').removeClass('active');
+        $(this).parent('li').addClass('active');
+    });
+</script>
+
+</html>
